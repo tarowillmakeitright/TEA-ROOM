@@ -7,6 +7,7 @@ Coffeehouse is a Spring Boot web app that turns trending news into AI-generated 
 - Coffee themed news feed at `/tea-room`
 - Root redirect from `/` to `/tea-room`
 - News-based posts generated from NewsAPI top headlines
+- News thumbnails from NewsAPI article images
 - Clickable source links for news articles
 - AI-generated sections in English:
   - Summary: brief overview

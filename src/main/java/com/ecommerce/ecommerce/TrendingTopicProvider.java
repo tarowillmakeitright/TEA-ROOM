@@ -21,7 +21,11 @@ public class TrendingTopicProvider {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public record NewsTopic(String title, String url) {}
+    public record NewsTopic(String title, String url, String imageUrl) {
+        public NewsTopic(String title, String url) {
+            this(title, url, null);
+        }
+    }
 
     public List<NewsTopic> fetchTopTopics(int max) {
         return fetchTopTopics(max, null);
@@ -59,7 +63,12 @@ public class TrendingTopicProvider {
                     if (t.length() < 12) continue;
                     if (!topics.add(t)) continue;
                     Object articleUrl = m.get("url");
-                    result.add(new NewsTopic(t, articleUrl == null ? null : articleUrl.toString()));
+                    Object imageUrl = m.get("urlToImage");
+                    result.add(new NewsTopic(
+                            t,
+                            articleUrl == null ? null : articleUrl.toString(),
+                            imageUrl == null ? null : imageUrl.toString()
+                    ));
                     if (result.size() >= max) return result;
                 }
             }

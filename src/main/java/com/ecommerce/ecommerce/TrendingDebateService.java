@@ -45,7 +45,8 @@ public class TrendingDebateService {
             TeaRoomPost saved = teaRoomService.createPostWithoutDefaultReplies(
                     "Coffeehouse Auto Editor",
                     topic.title() + "\n" + TITLE_TIME_FORMAT.format(Instant.now()),
-                    topic.url()
+                    topic.url(),
+                    topic.imageUrl()
             );
             createdPostIds.add(saved.getId());
             generateDebateRepliesAsync(saved.getId(), topic.title(), topic.url());

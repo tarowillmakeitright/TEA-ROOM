@@ -12,6 +12,7 @@ public class TeaRoomPost {
     private String authorName;
     private String content;
     private String sourceUrl;
+    private String imageUrl;
     private Instant createdAt = Instant.now();
 
     public String getId() { return id; }
@@ -22,6 +23,8 @@ public class TeaRoomPost {
     public void setContent(String content) { this.content = content; }
     public String getSourceUrl() { return sourceUrl; }
     public void setSourceUrl(String sourceUrl) { this.sourceUrl = sourceUrl; }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
 }

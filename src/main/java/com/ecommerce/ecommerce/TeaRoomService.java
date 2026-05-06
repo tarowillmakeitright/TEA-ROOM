@@ -20,15 +20,20 @@ public class TeaRoomService {
     }
 
     public TeaRoomPost createPostWithoutDefaultReplies(String authorName, String content) {
-        return createPostWithoutDefaultReplies(authorName, content, null);
+        return createPostWithoutDefaultReplies(authorName, content, null, null);
     }
 
     public TeaRoomPost createPostWithoutDefaultReplies(String authorName, String content, String sourceUrl) {
+        return createPostWithoutDefaultReplies(authorName, content, sourceUrl, null);
+    }
+
+    public TeaRoomPost createPostWithoutDefaultReplies(String authorName, String content, String sourceUrl, String imageUrl) {
         TeaRoomPost p = new TeaRoomPost();
         p.setId(UUID.randomUUID().toString());
         p.setAuthorName((authorName == null || authorName.isBlank()) ? "Anonymous" : authorName.trim());
         p.setContent(content.trim());
         p.setSourceUrl((sourceUrl == null || sourceUrl.isBlank()) ? null : sourceUrl.trim());
+        p.setImageUrl((imageUrl == null || imageUrl.isBlank()) ? null : imageUrl.trim());
         return postRepository.save(p);
     }
 

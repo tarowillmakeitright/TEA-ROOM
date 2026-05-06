@@ -37,6 +37,12 @@
                  th:data-article-id="${post.id}"
                  th:data-article-title="${post.content}">
           <div class="bubble">
+            <div class="detail-thumbnail"
+                 th:if="${post.imageUrl != null}"
+                 th:style="'background-image: url(' + ${post.imageUrl} + ')'"></div>
+            <div class="detail-thumbnail fallback" th:if="${post.imageUrl == null}">
+              <span>Coffeehouse</span>
+            </div>
             <div class="message-meta">
               <strong th:text="${post.authorName}">Guest</strong>
               <span>source topic</span>

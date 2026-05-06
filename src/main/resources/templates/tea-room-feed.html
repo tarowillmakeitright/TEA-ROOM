@@ -40,6 +40,12 @@
                  th:data-article-id="${p.id}"
                  th:data-article-title="${p.content}">
           <a class="thread-link" th:href="@{'/tea-room/' + ${p.id}}">
+            <div class="thumbnail"
+                 th:if="${p.imageUrl != null}"
+                 th:style="'background-image: url(' + ${p.imageUrl} + ')'"></div>
+            <div class="thumbnail fallback" th:if="${p.imageUrl == null}">
+              <span>Coffeehouse</span>
+            </div>
             <div class="thread-meta">
               <strong th:text="${p.authorName}">Guest</strong>
               <span>published a brief</span>

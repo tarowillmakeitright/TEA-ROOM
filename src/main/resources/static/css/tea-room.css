@@ -193,6 +193,38 @@ a {
     gap: 0.45rem;
 }
 
+.thumbnail,
+.detail-thumbnail {
+    background-color: var(--coffee-100);
+    background-position: center;
+    background-size: cover;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    min-height: 11rem;
+    overflow: hidden;
+}
+
+.detail-thumbnail {
+    border-color: rgba(255, 255, 255, 0.32);
+    margin-bottom: 0.75rem;
+    min-height: 16rem;
+}
+
+.thumbnail.fallback,
+.detail-thumbnail.fallback {
+    align-items: center;
+    background:
+        linear-gradient(135deg, rgba(85, 53, 31, 0.88), rgba(193, 132, 77, 0.78)),
+        var(--coffee-100);
+    color: white;
+    display: grid;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    place-items: center;
+    text-transform: uppercase;
+}
+
 .thread-card:hover {
     border-color: rgba(119, 75, 43, 0.35);
     box-shadow: 0 10px 24px rgba(53, 34, 22, 0.09);
