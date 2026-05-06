@@ -40,6 +40,7 @@ OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-4o-mini
 NEWS_API_KEY=your_newsapi_key
 NEWS_API_COUNTRY=us
+NEWS_API_CATEGORIES=science,technology,business
 MONGODB_URI=mongodb://localhost:27017/tearoom
 ```
 
@@ -114,6 +115,7 @@ curl -X POST http://localhost:8082/tea-room/debate/run-now
 ## Notes
 
 - Generated post titles contain only the news title and timestamp.
+- NewsAPI categories are configured with `NEWS_API_CATEGORIES`. Valid values include `business`, `entertainment`, `general`, `health`, `science`, `sports`, and `technology`.
 - AI replies are instructed to use English.
 - If NewsAPI is unavailable or no API key is configured, the app falls back to built-in debate topics.
 - If OpenAI is unavailable or no API key is configured, fallback replies are used.
