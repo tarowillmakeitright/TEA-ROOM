@@ -13,6 +13,7 @@ Coffeehouse is a Spring Boot web app that turns trending news into AI-generated 
   - Knowledge: background context with readable links from reliable source domains
   - Explanation: why the story matters
   - Conclusion: balanced takeaway and open question
+- Browser-side Good, Bad, Save, and Share buttons for each article
 - MongoDB-backed posts and replies
 - Scheduled news brief generation every 4 hours in Asia/Tokyo time
 - Manual generation endpoint for testing
@@ -116,6 +117,8 @@ curl -X POST http://localhost:8082/tea-room/debate/run-now
 - Generated post titles contain only the news title and timestamp.
 - Knowledge sections search related keyword combinations from the news title and append clickable related links from reliable source domains.
 - Reliable reference domains are configured with `NEWS_REFERENCE_DOMAINS`.
+- Save and reaction buttons are stored in the browser with `localStorage`.
+- Share uses the mobile OS share sheet when available and falls back to copying the link.
 - NewsAPI categories are configured with `NEWS_API_CATEGORIES`. Valid values include `business`, `entertainment`, `general`, `health`, `science`, `sports`, and `technology`.
 - AI replies are instructed to use English.
 - If NewsAPI is unavailable or no API key is configured, the app falls back to built-in debate topics.

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Coffeehouse</title>
   <link rel="stylesheet" href="/css/tea-room.css">
+  <script defer src="/js/article-actions.js"></script>
 </head>
 <body>
 <div class="app-shell">
@@ -33,15 +34,55 @@
         <p>No briefs yet. New topics are generated from the configured news source.</p>
       </div>
 
-      <div class="thread-list" th:if="${!#lists.isEmpty(posts)}">
-        <a class="thread-card" th:each="p : ${posts}" th:href="@{'/tea-room/' + ${p.id}}">
-          <div class="thread-meta">
-            <strong th:text="${p.authorName}">Guest</strong>
-            <span>published a brief</span>
+      <div class="swipe-hint" th:if="${!#lists.isEmpty(posts)}">
+        <span>Swipe right for Good</span>
+        <span>Swipe left for Bad</span>
+      </div>
+
+      <div class="thread-list swipe-deck" th:if="${!#lists.isEmpty(posts)}">
+        <article class="thread-card"
+                 th:each="p : ${posts}"
+                 data-swipe-card
+                 th:data-article-id="${p.id}"
+                 th:data-article-title="${p.content}">
+          <div class="swipe-badge good">Good</div>
+          <div class="swipe-badge bad">Bad</div>
+          <a class="thread-link" th:href="@{'/tea-room/' + ${p.id}}">
+            <div class="thread-meta">
+              <strong th:text="${p.authorName}">Guest</strong>
+              <span>published a brief</span>
+            </div>
+            <p th:text="${p.content}">Post preview</p>
+            <span class="source-pill" th:if="${p.sourceUrl != null}">News source available</span>
+          </a>
+          <div class="article-actions" aria-label="Article actions">
+            <a class="action-button read-button" th:href="@{'/tea-room/' + ${p.id}}" title="Read brief">
+              <span aria-hidden="true">#</span>
+              <span class="action-label">Read brief</span>
+            </a>
+            <button class="action-button" type="button" data-action="good" aria-pressed="false" title="Good">
+              <span aria-hidden="true">+</span>
+              <span class="action-label">Good</span>
+            </button>
+            <button class="action-button" type="button" data-action="bad" aria-pressed="false" title="Bad">
+              <span aria-hidden="true">-</span>
+              <span class="action-label">Bad</span>
+            </button>
+            <button class="action-button" type="button" data-action="favorite" aria-pressed="false" title="Save">
+              <span aria-hidden="true">*</span>
+              <span class="action-label">Save</span>
+            </button>
+            <button class="action-button" type="button"
+                    data-action="share"
+                    th:data-share-title="${p.content}"
+                    th:data-share-url="@{'/tea-room/' + ${p.id}}"
+                    th:data-source-url="${p.sourceUrl}"
+                    title="Share">
+              <span aria-hidden="true">&gt;</span>
+              <span class="action-label">Share</span>
+            </button>
           </div>
-          <p th:text="${p.content}">Post preview</p>
-          <span class="source-pill" th:if="${p.sourceUrl != null}">News source available</span>
-        </a>
+        </article>
       </div>
     </section>
   </main>
