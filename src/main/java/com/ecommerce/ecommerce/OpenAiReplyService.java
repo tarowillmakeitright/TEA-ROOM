@@ -24,7 +24,9 @@ public class OpenAiReplyService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String generate(String agentName, String stance, String postContent) {
-        if (apiKey == null || apiKey.isBlank()) {
+        String token = apiKey == null ? "" : apiKey.trim();
+        String selectedModel = model == null || model.isBlank() ? "gpt-4o-mini" : model.trim();
+        if (token.isBlank()) {
             return fallback(agentName);
         }
         try {
@@ -40,7 +42,7 @@ public class OpenAiReplyService {
             }
 
             Map<String, Object> body = Map.of(
-                    "model", model,
+                    "model", selectedModel,
                     "messages", List.of(
                             Map.of("role", "system", "content", system),
                             Map.of("role", "user", "content", "User post: " + postContent)
@@ -49,7 +51,7 @@ public class OpenAiReplyService {
             );
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setBearerAuth(apiKey);
+            headers.setBearerAuth(token);
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<Map<String, Object>> req = new HttpEntity<>(body, headers);
 
