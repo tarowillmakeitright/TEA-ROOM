@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Coffeehouse logo</title>
+  <desc id="desc">A simple coffee cup with steam.</desc>
+  <rect width="64" height="64" rx="16" fill="#55351f"/>
+  <path d="M22 30h21v10a10 10 0 0 1-10 10h-1a10 10 0 0 1-10-10V30Z" fill="#fffaf2"/>
+  <path d="M43 33h3a5 5 0 0 1 0 10h-3" fill="none" stroke="#fffaf2" stroke-width="4" stroke-linecap="round"/>
+  <path d="M19 52h27" stroke="#c1844d" stroke-width="4" stroke-linecap="round"/>
+  <path d="M26 24c-3-4 3-5 0-9" fill="none" stroke="#ead5bd" stroke-width="3" stroke-linecap="round"/>
+  <path d="M34 24c-3-4 3-5 0-9" fill="none" stroke="#ead5bd" stroke-width="3" stroke-linecap="round"/>
+  <path d="M42 24c-3-4 3-5 0-9" fill="none" stroke="#ead5bd" stroke-width="3" stroke-linecap="round"/>
+</svg>

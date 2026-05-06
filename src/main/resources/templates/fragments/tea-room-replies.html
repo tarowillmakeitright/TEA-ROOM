@@ -2,10 +2,10 @@
   <article class="message-row ai" th:if="${#lists.isEmpty(replies)}">
     <div class="thinking">
       <div class="message-meta">
-        <strong>Tea guests</strong>
-        <span>steeping</span>
+        <strong>Coffeehouse brief</strong>
+        <span>brewing</span>
       </div>
-      <p>Preparing replies...</p>
+      <p>Preparing sections...</p>
     </div>
   </article>
 
@@ -15,7 +15,7 @@
         <strong th:text="${r.agentName}">Agent</strong>
         <span class="stance" th:text="${r.stance}">stance</span>
       </div>
-      <p th:text="${r.content}">reply</p>
+      <p th:utext="${@linkFormatter.format(r.content)}">reply</p>
     </div>
   </article>
 </div>

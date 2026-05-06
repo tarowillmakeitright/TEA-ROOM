@@ -30,16 +30,8 @@ public class OpenAiReplyService {
             return fallback(agentName);
         }
         try {
-            String system;
-            if (stance != null && stance.contains("Jokes only")) {
-                system = "You are " + agentName + " in TEA ROOM. Your role is: " + stance + ". " +
-                        "Reply in English with only jokes. Do not analyze, advise, summarize, or explain. " +
-                        "Use 1-2 short sentences. Keep it witty and harmless.";
-            } else {
-                system = "You are " + agentName + " in TEA ROOM. Your perspective is: " + stance + ". " +
-                        "Reply in English in 2-3 concise sentences. Be intellectually sharp, concrete, and a little funny. " +
-                        "Make one clear argument, name the trade-off, and avoid generic encouragement.";
-            }
+            String system = "You write the " + agentName + " section for Coffeehouse. Your task is: " + stance + ". " +
+                    "Reply in English only. Be factual, clear, and concise. Avoid jokes, roleplay, and generic filler.";
 
             Map<String, Object> body = Map.of(
                     "model", selectedModel,
@@ -75,6 +67,9 @@ public class OpenAiReplyService {
     }
 
     private String fallback(String agentName) {
-        return "[" + agentName + "] That is the pressure point. Challenge one assumption, test it with a number, and do not let vibes drive the bus.";
+        if ("Knowledge".equals(agentName)) {
+            return "Background details are not available because the AI service could not respond. Check the original news source and trusted article references for context.";
+        }
+        return "[" + agentName + "] The AI service could not respond, so this section is temporarily unavailable.";
     }
 }

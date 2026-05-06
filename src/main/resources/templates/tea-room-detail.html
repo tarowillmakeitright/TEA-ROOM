@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TEA ROOM Chat</title>
+  <title>Coffeehouse Brief</title>
   <link rel="stylesheet" href="/css/tea-room.css">
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </head>
@@ -11,21 +11,23 @@
 <div class="app-shell">
   <header class="topbar">
     <a class="brand" href="/tea-room">
-      <span class="brand-mark">茶</span>
+      <span class="brand-mark">
+        <img class="brand-logo" src="/images/coffeehouse-logo.svg" alt="Coffeehouse logo">
+      </span>
       <span class="brand-title">
-        <strong>TEA ROOM</strong>
-        <span>Green tea chat thread</span>
+        <strong>Coffeehouse</strong>
+        <span>Freshly brewed news brief</span>
       </span>
     </a>
-    <a class="button secondary" href="/tea-room">All chats</a>
+    <a class="button secondary" href="/tea-room">All briefs</a>
   </header>
 
   <main class="page">
     <section class="chat-panel">
       <div class="chat-header">
         <div>
-          <h1>News debate</h1>
-          <p>Replies refresh while the commentators prepare their analysis.</p>
+          <h1>News brief</h1>
+          <p>Sections refresh while the summary, knowledge, explanation, and conclusion are prepared.</p>
         </div>
       </div>
 
@@ -34,7 +36,7 @@
           <div class="bubble">
             <div class="message-meta">
               <strong th:text="${post.authorName}">Guest</strong>
-              <span>you</span>
+              <span>source topic</span>
             </div>
             <p th:text="${post.content}">content</p>
             <a class="source-link"

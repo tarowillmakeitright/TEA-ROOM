@@ -18,13 +18,16 @@ public class TrendingDebateService {
     private final TeaRoomService teaRoomService;
     private final OpenAiReplyService openAiReplyService;
     private final TrendingTopicProvider topicProvider;
+    private final ReferenceLookupService referenceLookupService;
 
     public TrendingDebateService(TeaRoomService teaRoomService,
                                  OpenAiReplyService openAiReplyService,
-                                 TrendingTopicProvider topicProvider) {
+                                 TrendingTopicProvider topicProvider,
+                                 ReferenceLookupService referenceLookupService) {
         this.teaRoomService = teaRoomService;
         this.openAiReplyService = openAiReplyService;
         this.topicProvider = topicProvider;
+        this.referenceLookupService = referenceLookupService;
     }
 
     public List<String> runOnceNow() {
@@ -40,24 +43,39 @@ public class TrendingDebateService {
         List<String> createdPostIds = new ArrayList<>();
         for (TrendingTopicProvider.NewsTopic topic : topics) {
             TeaRoomPost saved = teaRoomService.createPostWithoutDefaultReplies(
-                    "TEA ROOM Auto Moderator",
+                    "Coffeehouse Auto Editor",
                     topic.title() + "\n" + TITLE_TIME_FORMAT.format(Instant.now()),
                     topic.url()
             );
             createdPostIds.add(saved.getId());
-            generateDebateRepliesAsync(saved.getId(), topic.title());
+            generateDebateRepliesAsync(saved.getId(), topic.title(), topic.url());
         }
         return createdPostIds;
     }
 
     @Async
-    public void generateDebateRepliesAsync(String postId, String topic) {
+    public void generateDebateRepliesAsync(String postId, String topic, String sourceUrl) {
         List<TeaRoomReply> replies = new ArrayList<>();
-        replies.add(make(postId, "Professor Logic", "Premise breakdown", openAiReplyService.generate("Professor Logic", "Break down assumptions, causality, and logical leaps. Smart, concise, slightly sharp.", "News debate: " + topic)));
-        replies.add(make(postId, "Data Samurai", "Numbers and counter-evidence", openAiReplyService.generate("Data Samurai", "Cut through the story with numbers, comparisons, and falsifiable claims. Dislike unsupported opinions.", "News debate: " + topic)));
-        replies.add(make(postId, "Contrarian Clown", "Entertaining contrarian", openAiReplyService.generate("Contrarian Clown", "Take a contrarian angle and expose blind spots in a funny way, while keeping the logic intact.", "News debate: " + topic)));
-        replies.add(make(postId, "Host Matcha", "Debate synthesis", openAiReplyService.generate("Host Matcha", "Organize the debate for viewers and identify the most important question left open.", "Summarize this news debate: " + topic)));
-        replies.add(make(postId, "Joke Shogun", "Jokes only", openAiReplyService.generate("Joke Shogun", "Jokes only. Make a short joke related to the news topic. No analysis, no advice, no conclusion. Keep it witty, harmless, and non-abusive.", "Joke material: " + topic)));
+        List<ReferenceLookupService.Reference> references = referenceLookupService.findReferences(topic, sourceUrl);
+        String referenceText = referenceLookupService.formatReferences(references);
+        String context = "News title: " + topic + "\n" + referenceText;
+
+        replies.add(make(postId, "Summary", "Brief overview", openAiReplyService.generate(
+                "Summary",
+                "Summarize the news in plain English. Use 2-3 concise sentences. Do not add jokes or personal opinion.",
+                context)));
+        replies.add(make(postId, "Knowledge", "Background and references", openAiReplyService.generate(
+                "Knowledge",
+                "Explain the key background knowledge in a readable way. Use the provided reliable article links as context, but do not invent citations or URLs. Do not write a References section.",
+                context) + "\n\n" + referenceText));
+        replies.add(make(postId, "Explanation", "Why it matters", openAiReplyService.generate(
+                "Explanation",
+                "Explain why this matters, who is affected, and the main trade-off. Use clear cause-and-effect reasoning in 3-4 concise sentences.",
+                context)));
+        replies.add(make(postId, "Conclusion", "Bottom line", openAiReplyService.generate(
+                "Conclusion",
+                "Give a balanced conclusion. State the most important takeaway and one open question to watch next. Use 2-3 concise sentences.",
+                context)));
         teaRoomService.addReplies(replies);
     }
 

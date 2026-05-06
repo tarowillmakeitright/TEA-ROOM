@@ -1,17 +1,17 @@
 :root {
-    --tea-950: #10251a;
-    --tea-900: #173826;
-    --tea-800: #215437;
-    --tea-700: #2f6f48;
-    --tea-600: #3f8b59;
-    --tea-500: #68a86f;
-    --tea-200: #d6e8c9;
-    --tea-100: #edf6e7;
-    --cream: #fbfbf2;
+    --coffee-950: #21160f;
+    --coffee-900: #352216;
+    --coffee-800: #55351f;
+    --coffee-700: #774b2b;
+    --coffee-600: #9a6539;
+    --coffee-500: #c1844d;
+    --coffee-200: #ead5bd;
+    --coffee-100: #f8efe4;
+    --cream: #fffaf2;
     --paper: #ffffff;
-    --ink: #17221b;
-    --muted: #67756b;
-    --line: rgba(31, 84, 55, 0.16);
+    --ink: #241a13;
+    --muted: #74685e;
+    --line: rgba(85, 53, 31, 0.17);
 }
 
 * {
@@ -22,8 +22,8 @@ body {
     margin: 0;
     min-height: 100vh;
     background:
-        radial-gradient(circle at top left, rgba(104, 168, 111, 0.28), transparent 34rem),
-        linear-gradient(180deg, var(--cream), var(--tea-100));
+        radial-gradient(circle at top left, rgba(193, 132, 77, 0.24), transparent 34rem),
+        linear-gradient(180deg, var(--cream), var(--coffee-100));
     color: var(--ink);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -62,23 +62,30 @@ a {
 
 .brand-mark {
     align-items: center;
-    background: linear-gradient(135deg, var(--tea-700), var(--tea-500));
+    background: linear-gradient(135deg, var(--coffee-800), var(--coffee-500));
     border-radius: 999px;
-    color: white;
     display: inline-flex;
-    font-weight: 800;
+    flex: 0 0 auto;
     height: 2.4rem;
     justify-content: center;
+    overflow: hidden;
     width: 2.4rem;
+}
+
+.brand-logo {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .brand-title {
     display: grid;
     gap: 0.05rem;
+    min-width: 0;
 }
 
 .brand-title strong {
-    color: var(--tea-950);
+    color: var(--coffee-950);
     font-size: 1rem;
     line-height: 1.1;
 }
@@ -86,11 +93,12 @@ a {
 .brand-title span {
     color: var(--muted);
     font-size: 0.78rem;
+    overflow-wrap: anywhere;
 }
 
 .button {
     align-items: center;
-    background: var(--tea-700);
+    background: var(--coffee-700);
     border: 1px solid transparent;
     border-radius: 999px;
     color: white;
@@ -105,13 +113,13 @@ a {
 }
 
 .button:hover {
-    background: var(--tea-800);
+    background: var(--coffee-800);
 }
 
 .button.secondary {
     background: rgba(255, 255, 255, 0.68);
     border-color: var(--line);
-    color: var(--tea-800);
+    color: var(--coffee-800);
 }
 
 .button.secondary:hover {
@@ -129,14 +137,14 @@ a {
     background: rgba(255, 255, 255, 0.78);
     border: 1px solid var(--line);
     border-radius: 8px;
-    box-shadow: 0 18px 48px rgba(16, 37, 26, 0.12);
+    box-shadow: 0 18px 48px rgba(53, 34, 22, 0.13);
     min-height: min(720px, calc(100vh - 8rem));
     overflow: hidden;
 }
 
 .chat-header {
     align-items: center;
-    background: linear-gradient(135deg, var(--tea-900), var(--tea-700));
+    background: linear-gradient(135deg, var(--coffee-900), var(--coffee-700));
     color: white;
     display: flex;
     justify-content: space-between;
@@ -181,8 +189,8 @@ a {
 }
 
 .thread-card:hover {
-    border-color: rgba(47, 111, 72, 0.35);
-    box-shadow: 0 10px 24px rgba(16, 37, 26, 0.08);
+    border-color: rgba(119, 75, 43, 0.35);
+    box-shadow: 0 10px 24px rgba(53, 34, 22, 0.09);
 }
 
 .thread-meta,
@@ -196,7 +204,7 @@ a {
 }
 
 .thread-card strong {
-    color: var(--tea-800);
+    color: var(--coffee-800);
 }
 
 .thread-card p {
@@ -215,8 +223,8 @@ a {
 }
 
 .source-pill {
-    background: rgba(104, 168, 111, 0.14);
-    color: var(--tea-800);
+    background: rgba(193, 132, 77, 0.16);
+    color: var(--coffee-800);
     padding: 0.28rem 0.6rem;
 }
 
@@ -251,8 +259,8 @@ a {
 }
 
 .message-row.user .bubble {
-    background: var(--tea-700);
-    border-color: var(--tea-700);
+    background: var(--coffee-800);
+    border-color: var(--coffee-800);
     color: white;
 }
 
@@ -273,16 +281,16 @@ a {
 }
 
 .stance {
-    background: rgba(104, 168, 111, 0.14);
+    background: rgba(193, 132, 77, 0.16);
     border-radius: 999px;
-    color: var(--tea-800);
+    color: var(--coffee-800);
     font-size: 0.72rem;
     font-weight: 700;
     padding: 0.18rem 0.48rem;
 }
 
 .thinking {
-    border: 1px dashed rgba(47, 111, 72, 0.32);
+    border: 1px dashed rgba(119, 75, 43, 0.32);
     border-radius: 8px;
     color: var(--muted);
     max-width: min(76%, 44rem);
@@ -301,7 +309,7 @@ a {
 }
 
 .field label {
-    color: var(--tea-900);
+    color: var(--coffee-900);
     font-size: 0.84rem;
     font-weight: 800;
 }
@@ -324,8 +332,8 @@ textarea {
 
 input:focus,
 textarea:focus {
-    border-color: var(--tea-500);
-    box-shadow: 0 0 0 3px rgba(104, 168, 111, 0.18);
+    border-color: var(--coffee-500);
+    box-shadow: 0 0 0 3px rgba(193, 132, 77, 0.18);
     outline: none;
 }
 

@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TEA ROOM</title>
+  <title>Coffeehouse</title>
   <link rel="stylesheet" href="/css/tea-room.css">
 </head>
 <body>
 <div class="app-shell">
   <header class="topbar">
     <a class="brand" href="/tea-room">
-      <span class="brand-mark">茶</span>
+      <span class="brand-mark">
+        <img class="brand-logo" src="/images/coffeehouse-logo.svg" alt="Coffeehouse logo">
+      </span>
       <span class="brand-title">
-        <strong>TEA ROOM</strong>
-        <span>Generated news debates with sharp AI commentators</span>
+        <strong>Coffeehouse</strong>
+        <span>News summaries brewed with context and conclusions</span>
       </span>
     </a>
   </header>
@@ -22,20 +24,20 @@
     <section class="chat-panel">
       <div class="chat-header">
         <div>
-          <h1>Recent debates</h1>
-          <p>Read generated news debates and jump to the original source.</p>
+          <h1>Recent news</h1>
+          <p>Read generated summaries, background context, explanations, and conclusions.</p>
         </div>
       </div>
 
       <div class="empty-state" th:if="${#lists.isEmpty(posts)}">
-        <p>No debates yet. New topics are generated from the configured news source.</p>
+        <p>No briefs yet. New topics are generated from the configured news source.</p>
       </div>
 
       <div class="thread-list" th:if="${!#lists.isEmpty(posts)}">
         <a class="thread-card" th:each="p : ${posts}" th:href="@{'/tea-room/' + ${p.id}}">
           <div class="thread-meta">
             <strong th:text="${p.authorName}">Guest</strong>
-            <span>started a chat</span>
+            <span>published a brief</span>
           </div>
           <p th:text="${p.content}">Post preview</p>
           <span class="source-pill" th:if="${p.sourceUrl != null}">News source available</span>

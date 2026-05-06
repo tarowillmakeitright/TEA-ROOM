@@ -1,23 +1,21 @@
-# TEA ROOM
+# Coffeehouse
 
-TEA ROOM is a Spring Boot web app that turns trending news into an AI-powered debate feed. It uses NewsAPI for current headlines, OpenAI for commentator replies, MongoDB for persistence, and a green tea themed Thymeleaf interface.
+Coffeehouse is a Spring Boot web app that turns trending news into AI-generated news briefs. It uses NewsAPI for current headlines, OpenAI for structured sections, MongoDB for persistence, and a coffee themed Thymeleaf interface.
 
 ## Features
 
-- Green tea themed debate feed at `/tea-room`
+- Coffee themed news feed at `/tea-room`
 - Root redirect from `/` to `/tea-room`
 - News-based posts generated from NewsAPI top headlines
 - Clickable source links for news articles
-- AI commentator replies in English
-- Five debate agents:
-  - Professor Logic: assumption and causality analysis
-  - Data Samurai: numbers, evidence, and falsifiable claims
-  - Contrarian Clown: funny contrarian arguments
-  - Host Matcha: concise debate synthesis
-  - Joke Shogun: jokes only
+- AI-generated sections in English:
+  - Summary: brief overview
+  - Knowledge: background context with readable links from reliable source domains
+  - Explanation: why the story matters
+  - Conclusion: balanced takeaway and open question
 - MongoDB-backed posts and replies
-- Scheduled debate generation every 4 hours in Asia/Tokyo time
-- Manual debate trigger endpoint for testing
+- Scheduled news brief generation every 4 hours in Asia/Tokyo time
+- Manual generation endpoint for testing
 - No public individual posting flow
 
 ## Tech Stack
@@ -41,6 +39,7 @@ OPENAI_MODEL=gpt-4o-mini
 NEWS_API_KEY=your_newsapi_key
 NEWS_API_COUNTRY=us
 NEWS_API_CATEGORIES=science,technology,business
+NEWS_REFERENCE_DOMAINS=reuters.com,apnews.com,bbc.com,npr.org,pbs.org,scientificamerican.com,nature.com,science.org,who.int,nih.gov,nasa.gov,smithsonianmag.com,nationalgeographic.com,livescience.com,space.com,theguardian.com
 MONGODB_URI=mongodb://localhost:27017/tearoom
 ```
 
@@ -101,12 +100,12 @@ java -jar target/tea-room-0.0.1-SNAPSHOT.jar
 | Method | Path | Purpose |
 | --- | --- | --- |
 | `GET` | `/` | Redirects to `/tea-room` |
-| `GET` | `/tea-room` | Debate feed |
-| `GET` | `/tea-room/{id}` | Debate detail page |
+| `GET` | `/tea-room` | News brief feed |
+| `GET` | `/tea-room/{id}` | News brief detail page |
 | `GET` | `/tea-room/{id}/replies` | Replies fragment |
-| `POST` | `/tea-room/debate/run-now` | Generate news debates immediately |
+| `POST` | `/tea-room/debate/run-now` | Generate news briefs immediately |
 
-Example manual debate trigger:
+Example manual generation trigger:
 
 ```bash
 curl -X POST http://localhost:8082/tea-room/debate/run-now
@@ -115,6 +114,8 @@ curl -X POST http://localhost:8082/tea-room/debate/run-now
 ## Notes
 
 - Generated post titles contain only the news title and timestamp.
+- Knowledge sections search related keyword combinations from the news title and append clickable related links from reliable source domains.
+- Reliable reference domains are configured with `NEWS_REFERENCE_DOMAINS`.
 - NewsAPI categories are configured with `NEWS_API_CATEGORIES`. Valid values include `business`, `entertainment`, `general`, `health`, `science`, `sports`, and `technology`.
 - AI replies are instructed to use English.
 - If NewsAPI is unavailable or no API key is configured, the app falls back to built-in debate topics.
