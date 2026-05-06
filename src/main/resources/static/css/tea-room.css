@@ -1,0 +1,363 @@
+:root {
+    --tea-950: #10251a;
+    --tea-900: #173826;
+    --tea-800: #215437;
+    --tea-700: #2f6f48;
+    --tea-600: #3f8b59;
+    --tea-500: #68a86f;
+    --tea-200: #d6e8c9;
+    --tea-100: #edf6e7;
+    --cream: #fbfbf2;
+    --paper: #ffffff;
+    --ink: #17221b;
+    --muted: #67756b;
+    --line: rgba(31, 84, 55, 0.16);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(104, 168, 111, 0.28), transparent 34rem),
+        linear-gradient(180deg, var(--cream), var(--tea-100));
+    color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.app-shell {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+}
+
+.topbar {
+    align-items: center;
+    background: rgba(251, 251, 242, 0.86);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(14px);
+    z-index: 10;
+}
+
+.brand {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.brand-mark {
+    align-items: center;
+    background: linear-gradient(135deg, var(--tea-700), var(--tea-500));
+    border-radius: 999px;
+    color: white;
+    display: inline-flex;
+    font-weight: 800;
+    height: 2.4rem;
+    justify-content: center;
+    width: 2.4rem;
+}
+
+.brand-title {
+    display: grid;
+    gap: 0.05rem;
+}
+
+.brand-title strong {
+    color: var(--tea-950);
+    font-size: 1rem;
+    line-height: 1.1;
+}
+
+.brand-title span {
+    color: var(--muted);
+    font-size: 0.78rem;
+}
+
+.button {
+    align-items: center;
+    background: var(--tea-700);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 700;
+    gap: 0.45rem;
+    justify-content: center;
+    min-height: 2.5rem;
+    padding: 0.7rem 1rem;
+}
+
+.button:hover {
+    background: var(--tea-800);
+}
+
+.button.secondary {
+    background: rgba(255, 255, 255, 0.68);
+    border-color: var(--line);
+    color: var(--tea-800);
+}
+
+.button.secondary:hover {
+    background: white;
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 980px;
+    padding: clamp(1rem, 4vw, 2.5rem);
+    width: 100%;
+}
+
+.chat-panel {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 18px 48px rgba(16, 37, 26, 0.12);
+    min-height: min(720px, calc(100vh - 8rem));
+    overflow: hidden;
+}
+
+.chat-header {
+    align-items: center;
+    background: linear-gradient(135deg, var(--tea-900), var(--tea-700));
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.15rem;
+}
+
+.chat-header h1 {
+    font-size: 1.05rem;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.chat-header p {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.82rem;
+    margin: 0.2rem 0 0;
+}
+
+.thread-list,
+.messages {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+}
+
+.empty-state {
+    align-items: center;
+    color: var(--muted);
+    display: grid;
+    min-height: 18rem;
+    place-items: center;
+    text-align: center;
+}
+
+.thread-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.95rem;
+}
+
+.thread-card:hover {
+    border-color: rgba(47, 111, 72, 0.35);
+    box-shadow: 0 10px 24px rgba(16, 37, 26, 0.08);
+}
+
+.thread-meta,
+.message-meta {
+    align-items: center;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    gap: 0.45rem;
+}
+
+.thread-card strong {
+    color: var(--tea-800);
+}
+
+.thread-card p {
+    margin: 0;
+}
+
+.source-pill,
+.source-link {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 0.76rem;
+    font-weight: 800;
+    margin-top: 0.25rem;
+    width: fit-content;
+}
+
+.source-pill {
+    background: rgba(104, 168, 111, 0.14);
+    color: var(--tea-800);
+    padding: 0.28rem 0.6rem;
+}
+
+.source-link {
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    color: white;
+    padding: 0.38rem 0.7rem;
+}
+
+.source-link:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.message-row {
+    display: flex;
+}
+
+.message-row.user {
+    justify-content: flex-end;
+}
+
+.message-row.ai {
+    justify-content: flex-start;
+}
+
+.bubble {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    max-width: min(76%, 44rem);
+    padding: 0.85rem 0.95rem;
+}
+
+.message-row.user .bubble {
+    background: var(--tea-700);
+    border-color: var(--tea-700);
+    color: white;
+}
+
+.message-row.ai .bubble,
+.thinking {
+    background: white;
+    color: var(--ink);
+}
+
+.bubble p,
+.thinking p {
+    margin: 0.35rem 0 0;
+    white-space: pre-wrap;
+}
+
+.message-row.user .message-meta {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.stance {
+    background: rgba(104, 168, 111, 0.14);
+    border-radius: 999px;
+    color: var(--tea-800);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.18rem 0.48rem;
+}
+
+.thinking {
+    border: 1px dashed rgba(47, 111, 72, 0.32);
+    border-radius: 8px;
+    color: var(--muted);
+    max-width: min(76%, 44rem);
+    padding: 0.85rem 0.95rem;
+}
+
+.compose-panel {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.field label {
+    color: var(--tea-900);
+    font-size: 0.84rem;
+    font-weight: 800;
+}
+
+input,
+textarea {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    font: inherit;
+    padding: 0.85rem 0.95rem;
+    width: 100%;
+}
+
+textarea {
+    min-height: 12rem;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--tea-500);
+    box-shadow: 0 0 0 3px rgba(104, 168, 111, 0.18);
+    outline: none;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: flex-end;
+}
+
+@media (max-width: 680px) {
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .bubble,
+    .thinking {
+        max-width: 92%;
+    }
+
+    .actions {
+        justify-content: stretch;
+    }
+
+    .button {
+        width: 100%;
+    }
+}

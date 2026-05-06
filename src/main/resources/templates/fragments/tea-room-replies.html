@@ -1,0 +1,21 @@
+<div th:fragment="replyList">
+  <article class="message-row ai" th:if="${#lists.isEmpty(replies)}">
+    <div class="thinking">
+      <div class="message-meta">
+        <strong>Tea guests</strong>
+        <span>steeping</span>
+      </div>
+      <p>Preparing replies...</p>
+    </div>
+  </article>
+
+  <article class="message-row ai" th:each="r : ${replies}">
+    <div class="bubble">
+      <div class="message-meta">
+        <strong th:text="${r.agentName}">Agent</strong>
+        <span class="stance" th:text="${r.stance}">stance</span>
+      </div>
+      <p th:text="${r.content}">reply</p>
+    </div>
+  </article>
+</div>
